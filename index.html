@@ -58,7 +58,7 @@
 
         .menu-category h3 {
             margin-top: 0; color: var(--accent-color); border-bottom: 1px solid #333;
-            padding-bottom: 10px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px;
+            padding-bottom: 10px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;
         }
 
         .menu-category ul { list-style: none; padding: 0; }
@@ -69,59 +69,71 @@
 
         .menu-category li span { color: var(--accent-color); font-weight: 600; }
 
-        /* --- Sistema di Prenotazione e Quantità --- */
+        /* --- Booking Card --- */
         .booking-card {
-            background: var(--card-bg); padding: 50px; border-radius: 20px; border: 1px solid #222;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            background: var(--card-bg); padding: clamp(20px, 5vw, 50px); border-radius: 20px; border: 1px solid #222;
         }
 
         .order-system {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px; background: #080808; padding: 20px; border-radius: 10px; border: 1px solid #222;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 12px; background: #080808; padding: 20px; border-radius: 12px; border: 1px solid #222;
         }
 
         .qty-item {
             display: flex; align-items: center; justify-content: space-between;
-            background: #151515; padding: 10px 15px; border-radius: 8px; border: 1px solid #333;
-            transition: 0.3s;
+            background: #151515; padding: 12px 15px; border-radius: 8px; border: 1px solid #222;
+            transition: all 0.3s ease;
         }
 
-        .qty-item.active { border-color: var(--accent-color); background: #1a1810; }
+        .qty-item.active { border-color: var(--accent-color); background: #1a1810; box-shadow: 0 0 15px rgba(212, 175, 55, 0.05); }
 
-        .qty-label { font-size: 0.8rem; color: #eee; }
-        .qty-price-hint { font-size: 0.7rem; color: var(--accent-color); display: block; opacity: 0.7; }
+        .qty-label { font-size: 0.8rem; color: #eee; font-weight: 500; }
+        .qty-price-hint { font-size: 0.7rem; color: var(--accent-color); display: block; opacity: 0.6; margin-top: 2px; }
 
-        .qty-controls { display: flex; align-items: center; gap: 10px; }
+        .qty-controls { display: flex; align-items: center; gap: 12px; }
 
         .btn-qty {
-            background: #222; border: 1px solid var(--accent-color); color: var(--accent-color);
-            width: 25px; height: 25px; border-radius: 5px; cursor: pointer; font-weight: bold;
-            transition: 0.2s;
+            background: #222; border: 1px solid #444; color: #fff;
+            width: 28px; height: 28px; border-radius: 6px; cursor: pointer; font-size: 1rem;
+            display: flex; align-items: center; justify-content: center; transition: 0.2s;
         }
 
-        .btn-qty:hover { background: var(--accent-color); color: black; }
+        .btn-qty:hover { border-color: var(--accent-color); color: var(--accent-color); }
 
-        .qty-val { font-weight: bold; color: white; min-width: 15px; text-align: center; }
+        .qty-val { font-weight: 700; color: white; min-width: 20px; text-align: center; font-size: 0.9rem; }
 
-        /* --- Form Elements --- */
+        /* --- Luxury Checkbox --- */
+        .performance-box {
+            margin: 30px 0; padding: 25px; border-radius: 12px;
+            background: linear-gradient(135deg, #111 0%, #0a0a0a 100%);
+            border: 1px solid #333; display: flex; align-items: center; justify-content: space-between;
+            transition: 0.4s;
+        }
+
+        .performance-box.checked { border-color: var(--accent-color); box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
+
+        .perf-info { display: flex; align-items: center; gap: 15px; }
+        .perf-icon { font-size: 1.5rem; color: var(--accent-color); }
+        .perf-text strong { display: block; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+        .perf-text small { color: #777; font-size: 0.75rem; }
+
+        /* --- Form --- */
         .form-group { margin-bottom: 25px; }
-        label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--accent-color); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;}
-        input { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid #333; color: white; border-radius: 8px; box-sizing: border-box; font-family: 'Inter'; }
+        label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--accent-color); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;}
+        input { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid #333; color: white; border-radius: 8px; box-sizing: border-box; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--accent-color); }
 
-        .checkbox-container {
-            display: flex; align-items: center; background: #12100a;
-            padding: 20px; border: 1px dashed var(--accent-color); border-radius: 12px; margin: 30px 0; cursor: pointer;
-        }
+        #budget { background: #000; border: 1px solid var(--accent-color); text-align: center; letter-spacing: 2px; }
 
         .btn-submit {
-            background: var(--gold-gradient); color: black; padding: 20px; border: none;
-            border-radius: 8px; font-weight: 800; cursor: pointer; width: 100%;
-            text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; font-size: 1rem;
+            background: var(--gold-gradient); color: black; padding: 22px; border: none;
+            border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%;
+            text-transform: uppercase; letter-spacing: 3px; transition: 0.4s; font-size: 0.9rem;
         }
 
-        .btn-submit:hover { filter: brightness(1.2); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
+        .btn-submit:hover { filter: brightness(1.2); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 
-        footer { text-align: center; padding: 60px; color: #444; font-size: 0.75rem; border-top: 1px solid #111; }
+        footer { text-align: center; padding: 60px; color: #444; font-size: 0.75rem; }
     </style>
 </head>
 <body>
@@ -167,15 +179,15 @@
 
     <section id="booking">
         <div class="booking-card">
-            <h2 style="text-align: center; color: var(--accent-color); font-family: 'Playfair Display'; margin: 0 0 10px 0;">Prenotazione Area Riservata</h2>
-            <p style="text-align: center; font-size: 0.8rem; color: #666; margin-bottom: 30px;">Base minima prenotazione: $5.000 (Beverage escluso)</p>
+            <h2 style="text-align: center; color: var(--accent-color); font-family: 'Playfair Display'; margin: 0 0 10px 0;">Prenotazione Evento</h2>
+            <p style="text-align: center; font-size: 0.8rem; color: #666; margin-bottom: 40px;">Esclusività garantita. Base minima di prenotazione: $ 5.000</p>
             
             <form id="eventForm">
                 <div class="form-group">
-                    <label>Responsabile & Telefono</label>
-                    <div style="display: flex; gap: 10px;">
+                    <label>Responsabile & Recapito</label>
+                    <div style="display: flex; gap: 15px;">
                         <input type="text" id="name" placeholder="Nome IC" required>
-                        <input type="tel" id="phone" placeholder="Telefono" required>
+                        <input type="tel" id="phone" placeholder="Numero di Telefono" required>
                     </div>
                 </div>
 
@@ -185,25 +197,28 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Componi il tuo ordine (Quantità)</label>
-                    <div class="order-system" id="orderGrid">
-                        </div>
+                    <label>Selezione Beverage & Food (Quantità)</label>
+                    <div class="order-system" id="orderGrid"></div>
                 </div>
 
-                <div class="checkbox-container">
-                    <input type="checkbox" id="extraService" onchange="updateTotal()">
-                    <div style="margin-left: 15px;">
-                        <strong style="color: var(--accent-color);">Private Performance (+ $2.000)</strong>
-                        <small style="display: block; color: #888;">Include accesso riservato alla sala VIP e show dedicato.</small>
+                <div class="performance-box" id="perfBox">
+                    <div class="perf-info">
+                        <span class="perf-icon">✨</span>
+                        <div class="perf-text">
+                            <strong>Private Performance</strong>
+                            <small>Accesso Area Gold con intrattenimento (+ $ 2.000)</small>
+                        </div>
                     </div>
+                    <input type="checkbox" id="extraService" style="width: 25px; height: 25px; cursor: pointer; accent-color: var(--accent-color);" onchange="updateTotal()">
                 </div>
 
                 <div class="form-group">
-                    <label>Budget Totale Calcolato ($)</label>
-                    <input type="number" id="budget" value="5000" readonly style="color: var(--accent-color); font-size: 1.8rem; font-weight: bold; border-color: var(--accent-color); background: #000;">
+                    <label>Budget Totale Stimato</label>
+                    <input type="text" id="budget_display" value="$ 5.000" readonly style="color: var(--accent-color); font-size: 2rem; font-weight: bold; border-color: var(--accent-color); height: 80px;">
+                    <input type="hidden" id="budget" value="5000">
                 </div>
 
-                <button type="submit" class="btn-submit">Invia Richiesta Esclusiva</button>
+                <button type="submit" class="btn-submit">Invia Prenotazione Privata</button>
             </form>
         </div>
     </section>
@@ -212,10 +227,11 @@
 
     <script>
         const menuData = [
-            { name: "Macbeth Whiskey", price: 150 },
+            { name: "Macbeth Whiskey Shot", price: 150 },
             { name: "Tequila Shot", price: 150 },
             { name: "Vodka Shot", price: 150 },
             { name: "Richards Whiskey", price: 800 },
+            { name: "Cherenkov Vodka", price: 750 },
             { name: "Blêuter'd Diamond", price: 2500 },
             { name: "Blêuter'd Gold", price: 1800 },
             { name: "Pißwasser", price: 100 },
@@ -233,15 +249,15 @@
             counts[item.name] = 0;
             const div = document.createElement('div');
             div.className = 'qty-item';
-            div.id = `container-${item.name.replace(/\s+/g, '-')}`;
+            div.id = `item-${item.name.replace(/\s+/g, '-')}`;
             div.innerHTML = `
                 <div>
                     <span class="qty-label">${item.name}</span>
-                    <span class="qty-price-hint">$${item.price} cad.</span>
+                    <span class="qty-price-hint">$ ${item.price} cad.</span>
                 </div>
                 <div class="qty-controls">
-                    <button type="button" class="btn-qty" onclick="changeQty('${item.name}', -1)">-</button>
-                    <span class="qty-val" id="count-${item.name}">0</span>
+                    <button type="button" class="btn-qty" onclick="changeQty('${item.name}', -1)">−</button>
+                    <span class="qty-val" id="cnt-${item.name}">0</span>
                     <button type="button" class="btn-qty" onclick="changeQty('${item.name}', 1)">+</button>
                 </div>
             `;
@@ -250,9 +266,9 @@
 
         function changeQty(itemName, delta) {
             counts[itemName] = Math.max(0, counts[itemName] + delta);
-            document.getElementById(`count-${itemName}`).innerText = counts[itemName];
+            document.getElementById(`cnt-${itemName}`).innerText = counts[itemName];
             
-            const container = document.getElementById(`container-${itemName.replace(/\s+/g, '-')}`);
+            const container = document.getElementById(`item-${itemName.replace(/\s+/g, '-')}`);
             if(counts[itemName] > 0) container.classList.add('active');
             else container.classList.remove('active');
             
@@ -261,49 +277,48 @@
 
         function updateTotal() {
             let total = 5000;
-            menuData.forEach(item => {
-                total += (counts[item.name] * item.price);
-            });
-            if (document.getElementById('extraService').checked) total += 2000;
+            menuData.forEach(item => { total += (counts[item.name] * item.price); });
+            
+            const extraChecked = document.getElementById('extraService').checked;
+            if (extraChecked) {
+                total += 2000;
+                document.getElementById('perfBox').classList.add('checked');
+            } else {
+                document.getElementById('perfBox').classList.remove('checked');
+            }
+
             document.getElementById('budget').value = total;
+            document.getElementById('budget_display').value = `$ ${total.toLocaleString()}`;
         }
 
         document.getElementById('eventForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             let orderItems = [];
-            let subtotalProducts = 0;
-            for (const item of menuData) {
-                const qty = counts[item.name];
-                if (qty > 0) {
-                    const cost = qty * item.price;
-                    orderItems.push(`▫️ **${qty}x** ${item.name} ($${cost})`);
-                    subtotalProducts += cost;
+            let subtotalItems = 0;
+            menuData.forEach(item => {
+                if (counts[item.name] > 0) {
+                    const cost = counts[item.name] * item.price;
+                    orderItems.push(`🔹 **${counts[item.name]}x** ${item.name} ($ ${cost.toLocaleString()})`);
+                    subtotalItems += cost;
                 }
-            }
-
-            const totalFinal = document.getElementById('budget').value;
-            const extra = document.getElementById('extraService').checked ? "✅ **RICHIESTO** (+$2.000)" : "❌ Non richiesto";
+            });
 
             const payload = {
-                username: "Management | The Old Roof",
-                avatar_url: "https://images.unsplash.com/photo-1574096079513-d8259312b785?q=80&w=200",
+                username: "System | The Old Roof",
+                avatar_url: "https://i.imgur.com/your-logo-here.png",
                 embeds: [{
-                    title: "💎 NUOVA PRENOTAZIONE CLUB",
-                    description: "È stata ricevuta una richiesta per un evento privato presso **The Old Roof**.",
+                    title: "⚜️ NUOVA RICHIESTA EVENTO ESCLUSIVO",
+                    description: "Un nuovo cliente desidera prenotare un'esperienza privata presso il club.",
                     color: 13936183,
                     fields: [
                         { name: "👤 CLIENTE", value: `**Nome:** ${document.getElementById('name').value}\n**Tel:** ${document.getElementById('phone').value}`, inline: true },
-                        { name: "📅 DATA EVENTO", value: `**Giorno:** ${document.getElementById('date').value}`, inline: true },
-                        { name: "──────────────────", value: "📦 **DETTAGLIO ORDINE**" },
-                        { name: "Beverage & Food", value: orderItems.length > 0 ? orderItems.join('\n') : "Nessun prodotto aggiuntivo selezionato." },
-                        { name: "Performance Privata", value: extra, inline: true },
-                        { name: "──────────────────", value: "💰 **RIEPILOGO ECONOMICO**" },
-                        { name: "Affitto Area Base", value: "$ 5.000", inline: true },
-                        { name: "Totale Prodotti", value: `$ ${subtotalProducts}`, inline: true },
-                        { name: "TOTALE FINALE", value: `### $ ${totalFinal}` }
+                        { name: "📅 DATA PREVISTA", value: `**Giorno:** ${document.getElementById('date').value}`, inline: true },
+                        { name: "🍸 DETTAGLIO CONSUMAZIONI", value: orderItems.length > 0 ? orderItems.join('\n') : "_Nessun ordine aggiuntivo selezionato._" },
+                        { name: "🎭 PERFORMANCE", value: document.getElementById('extraService').checked ? "✨ **SÌ** (Area VIP)" : "❌ No", inline: true },
+                        { name: "💵 RIEPILOGO", value: `Affitto Base: **$ 5.000**\nConsumazioni: **$ ${subtotalItems.toLocaleString()}**\n\n**TOTALE FINALE: $ ${document.getElementById('budget').value.toLocaleString()}**` }
                     ],
-                    footer: { text: "The Old Roof • Sistema Gestionale Automatizzato • 2026" },
+                    footer: { text: "The Old Roof • Amministrazione Automatica • 2026" },
                     timestamp: new Date()
                 }]
             };
@@ -313,9 +328,9 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             }).then(() => {
-                alert('Richiesta inviata. Il Management analizzerà la tua prenotazione a breve.');
+                alert('Prenotazione inviata con successo. Verrai ricontattato a breve dal nostro staff.');
                 location.reload();
-            }).catch(() => alert('Errore di connessione. Riprova.'));
+            });
         });
     </script>
 </body>
