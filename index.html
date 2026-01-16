@@ -26,93 +26,102 @@
         header {
             height: 60vh;
             background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1574096079513-d8259312b785?q=80&w=1500');
-            background-size: cover;
-            background-position: center;
+            background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             border-bottom: 1px solid var(--accent-color);
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 10vw, 5rem);
-            margin: 0;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 8px;
-            text-transform: uppercase;
+            font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 5rem);
+            margin: 0; background: var(--gold-gradient); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; letter-spacing: 8px; text-transform: uppercase;
         }
 
         .subtitle { font-size: 1rem; letter-spacing: 5px; text-transform: uppercase; margin-top: 15px; color: #888; }
 
-        section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; }
+        section { padding: 60px 20px; max-width: 1100px; margin: 0 auto; }
 
+        .section-title {
+            text-align: center; font-family: 'Playfair Display', serif;
+            font-size: 2.5rem; color: var(--accent-color); margin-bottom: 40px;
+        }
+
+        /* --- Listino Estetico --- */
+        .menu-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px; margin-bottom: 80px;
+        }
+
+        .menu-category {
+            background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid #222;
+        }
+
+        .menu-category h3 {
+            margin-top: 0; color: var(--accent-color); border-bottom: 1px solid #333;
+            padding-bottom: 10px; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px;
+        }
+
+        .menu-category ul { list-style: none; padding: 0; }
+        .menu-category li {
+            padding: 8px 0; border-bottom: 1px solid #1a1a1a; font-size: 0.85rem;
+            display: flex; justify-content: space-between; color: #bbb;
+        }
+
+        .menu-category li span { color: var(--accent-color); font-weight: 600; }
+
+        /* --- Sistema di Prenotazione e Quantità --- */
         .booking-card {
-            background: var(--card-bg);
-            padding: 50px;
-            border-radius: 20px;
-            border: 1px solid #222;
+            background: var(--card-bg); padding: 50px; border-radius: 20px; border: 1px solid #222;
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
 
-        .form-group { margin-bottom: 25px; }
-
-        label {
-            display: block; margin-bottom: 10px; font-weight: 600;
-            color: var(--accent-color); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+        .order-system {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px; background: #080808; padding: 20px; border-radius: 10px; border: 1px solid #222;
         }
 
-        input {
-            width: 100%; padding: 15px; background: var(--input-bg);
-            border: 1px solid #333; color: white; border-radius: 8px; box-sizing: border-box;
-        }
-
-        /* --- Menu Selection System --- */
-        .menu-selection-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            background: #0a0a0a;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #222;
-        }
-
-        .menu-item {
-            padding: 8px 16px;
-            background: #1a1a1a;
-            border: 1px solid #444;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85rem;
+        .qty-item {
+            display: flex; align-items: center; justify-content: space-between;
+            background: #151515; padding: 10px 15px; border-radius: 8px; border: 1px solid #333;
             transition: 0.3s;
-            color: #bbb;
         }
 
-        .menu-item:hover { border-color: var(--accent-color); color: white; }
+        .qty-item.active { border-color: var(--accent-color); background: #1a1810; }
 
-        .menu-item.selected {
-            background: var(--gold-gradient);
-            color: black;
-            font-weight: 600;
-            border-color: #fff;
+        .qty-label { font-size: 0.8rem; color: #eee; }
+        .qty-price-hint { font-size: 0.7rem; color: var(--accent-color); display: block; opacity: 0.7; }
+
+        .qty-controls { display: flex; align-items: center; gap: 10px; }
+
+        .btn-qty {
+            background: #222; border: 1px solid var(--accent-color); color: var(--accent-color);
+            width: 25px; height: 25px; border-radius: 5px; cursor: pointer; font-weight: bold;
+            transition: 0.2s;
         }
+
+        .btn-qty:hover { background: var(--accent-color); color: black; }
+
+        .qty-val { font-weight: bold; color: white; min-width: 15px; text-align: center; }
+
+        /* --- Form Elements --- */
+        .form-group { margin-bottom: 25px; }
+        label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--accent-color); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;}
+        input { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid #333; color: white; border-radius: 8px; box-sizing: border-box; font-family: 'Inter'; }
 
         .checkbox-container {
             display: flex; align-items: center; background: #12100a;
-            padding: 25px; border: 1px dashed var(--accent-color);
-            border-radius: 12px; cursor: pointer; margin: 30px 0;
+            padding: 20px; border: 1px dashed var(--accent-color); border-radius: 12px; margin: 30px 0; cursor: pointer;
         }
-
-        .checkbox-container input { width: 25px; height: 25px; margin-right: 20px; accent-color: var(--accent-color); }
 
         .btn-submit {
-            background: var(--gold-gradient); color: black; padding: 20px;
-            border: none; border-radius: 8px; font-weight: 800; cursor: pointer;
-            width: 100%; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px;
+            background: var(--gold-gradient); color: black; padding: 20px; border: none;
+            border-radius: 8px; font-weight: 800; cursor: pointer; width: 100%;
+            text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; font-size: 1rem;
         }
 
-        footer { text-align: center; padding: 60px; color: #444; font-size: 0.75rem; }
+        .btn-submit:hover { filter: brightness(1.2); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
+
+        footer { text-align: center; padding: 60px; color: #444; font-size: 0.75rem; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
@@ -122,20 +131,52 @@
         <div class="subtitle">Design • Spensieratezza • Ordine</div>
     </header>
 
+    <section id="listino">
+        <h2 class="section-title">La Nostra Selezione</h2>
+        <div class="menu-grid">
+            <div class="menu-category">
+                <h3>Spirits & Shots</h3>
+                <ul>
+                    <li>Macbeth Whiskey Shot <span>$ 150</span></li>
+                    <li>Tequila Shot <span>$ 150</span></li>
+                    <li>Vodka Shot <span>$ 150</span></li>
+                    <li>Richards Whiskey <span>$ 800</span></li>
+                    <li>Cherenkov Vodka <span>$ 750</span></li>
+                </ul>
+            </div>
+            <div class="menu-category">
+                <h3>Champagne & Beer</h3>
+                <ul>
+                    <li>Blêuter'd Diamond <span>$ 2.500</span></li>
+                    <li>Blêuter'd Gold <span>$ 1.800</span></li>
+                    <li>Pißwasser <span>$ 100</span></li>
+                    <li>Logger Beer <span>$ 100</span></li>
+                </ul>
+            </div>
+            <div class="menu-category">
+                <h3>Snacks & Soft</h3>
+                <ul>
+                    <li>Meteorite Bar <span>$ 50</span></li>
+                    <li>Phat Chips <span>$ 50</span></li>
+                    <li>eCola <span>$ 40</span></li>
+                    <li>Junk Energy <span>$ 60</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <section id="booking">
         <div class="booking-card">
-            <h2 style="text-align: center; color: var(--accent-color); font-family: 'Playfair Display'; font-size: 2.2rem; margin-top: 0;">Private Event Booking</h2>
-            <p style="text-align: center; color: #666; margin-bottom: 40px;">Prenotazione minima area riservata: $5.000</p>
+            <h2 style="text-align: center; color: var(--accent-color); font-family: 'Playfair Display'; margin: 0 0 10px 0;">Prenotazione Area Riservata</h2>
+            <p style="text-align: center; font-size: 0.8rem; color: #666; margin-bottom: 30px;">Base minima prenotazione: $5.000 (Beverage escluso)</p>
             
             <form id="eventForm">
                 <div class="form-group">
-                    <label>Responsabile Prenotazione</label>
-                    <input type="text" id="name" placeholder="Nome e Cognome IC" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Recapito Telefonico</label>
-                    <input type="tel" id="phone" placeholder="Es: 555-0123" required>
+                    <label>Responsabile & Telefono</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="name" placeholder="Nome IC" required>
+                        <input type="tel" id="phone" placeholder="Telefono" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -144,111 +185,137 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Seleziona Beverage & Food (Clicca per aggiungere all'ordine)</label>
-                    <div class="menu-selection-container" id="menuItems">
-                        <div class="menu-item" data-value="Macbeth Whiskey Shot">Macbeth Whiskey Shot</div>
-                        <div class="menu-item" data-value="Tequila Shot">Tequila Shot</div>
-                        <div class="menu-item" data-value="Vodka Shot">Vodka Shot</div>
-                        <div class="menu-item" data-value="Richards Whiskey">Richards Whiskey</div>
-                        <div class="menu-item" data-value="Cherenkov Vodka">Cherenkov Vodka</div>
-                        <div class="menu-item" data-value="Rum & Cola">Rum & Cola</div>
-                        <div class="menu-item" data-value="Blêuter'd Diamond">Blêuter'd Diamond</div>
-                        <div class="menu-item" data-value="Blêuter'd Gold">Blêuter'd Gold</div>
-                        <div class="menu-item" data-value="Pißwasser">Pißwasser</div>
-                        <div class="menu-item" data-value="Logger Beer">Logger Beer</div>
-                        <div class="menu-item" data-value="Patriot Beer">Patriot Beer</div>
-                        <div class="menu-item" data-value="Meteorite Bar">Meteorite Bar</div>
-                        <div class="menu-item" data-value="P's & Q's">P's & Q's</div>
-                        <div class="menu-item" data-value="EgoChaser">EgoChaser</div>
-                        <div class="menu-item" data-value="Phat Chips">Phat Chips</div>
-                    </div>
+                    <label>Componi il tuo ordine (Quantità)</label>
+                    <div class="order-system" id="orderGrid">
+                        </div>
                 </div>
 
                 <div class="checkbox-container">
-                    <input type="checkbox" id="extraService" onchange="toggleExtra()">
-                    <div class="checkbox-label">
-                        <strong>Private Performance (+ $2.000)</strong>
-                        <small style="display: block; color: #888;">Include accesso alla sala privata con intrattenimento dedicato.</small>
+                    <input type="checkbox" id="extraService" onchange="updateTotal()">
+                    <div style="margin-left: 15px;">
+                        <strong style="color: var(--accent-color);">Private Performance (+ $2.000)</strong>
+                        <small style="display: block; color: #888;">Include accesso riservato alla sala VIP e show dedicato.</small>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Budget Totale Calcolato ($)</label>
-                    <input type="number" id="budget" value="5000" readonly style="color: var(--accent-color); font-size: 1.5rem; font-weight: bold;">
+                    <input type="number" id="budget" value="5000" readonly style="color: var(--accent-color); font-size: 1.8rem; font-weight: bold; border-color: var(--accent-color); background: #000;">
                 </div>
 
-                <button type="submit" class="btn-submit">Conferma Prenotazione</button>
+                <button type="submit" class="btn-submit">Invia Richiesta Esclusiva</button>
             </form>
         </div>
     </section>
 
-    <footer>
-        THE OLD ROOF &copy; 2026 • DESIGN & EFFICIENZA <br>
-        <span style="color: #222; margin-top: 10px; display: block;">Operazioni riservate e confidenziali.</span>
-    </footer>
+    <footer>THE OLD ROOF &copy; 2026 • DESIGN & EFFICIENZA</footer>
 
     <script>
-        const webhookURL = 'https://discord.com/api/webhooks/1461649467936608446/6BHjxeCde4CI0yg5up2J1Jv24-K4dh35U2FsJQQTuV3llqUqMS8x7XLlve4RtzTHWPDe';
-        const budgetInput = document.getElementById('budget');
-        const extraCheck = document.getElementById('extraService');
-        const menuItems = document.querySelectorAll('.menu-item');
-        let selectedItems = [];
+        const menuData = [
+            { name: "Macbeth Whiskey", price: 150 },
+            { name: "Tequila Shot", price: 150 },
+            { name: "Vodka Shot", price: 150 },
+            { name: "Richards Whiskey", price: 800 },
+            { name: "Blêuter'd Diamond", price: 2500 },
+            { name: "Blêuter'd Gold", price: 1800 },
+            { name: "Pißwasser", price: 100 },
+            { name: "Logger Beer", price: 100 },
+            { name: "Meteorite Bar", price: 50 },
+            { name: "Phat Chips", price: 50 },
+            { name: "eCola", price: 40 },
+            { name: "Junk Energy", price: 60 }
+        ];
 
-        // Gestione selezione Menu (Click sulle chips)
-        menuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                item.classList.toggle('selected');
-                const val = item.getAttribute('data-value');
-                
-                if (item.classList.contains('selected')) {
-                    selectedItems.push(val);
-                } else {
-                    selectedItems = selectedItems.filter(i => i !== val);
-                }
-            });
+        const orderGrid = document.getElementById('orderGrid');
+        const counts = {};
+
+        menuData.forEach(item => {
+            counts[item.name] = 0;
+            const div = document.createElement('div');
+            div.className = 'qty-item';
+            div.id = `container-${item.name.replace(/\s+/g, '-')}`;
+            div.innerHTML = `
+                <div>
+                    <span class="qty-label">${item.name}</span>
+                    <span class="qty-price-hint">$${item.price} cad.</span>
+                </div>
+                <div class="qty-controls">
+                    <button type="button" class="btn-qty" onclick="changeQty('${item.name}', -1)">-</button>
+                    <span class="qty-val" id="count-${item.name}">0</span>
+                    <button type="button" class="btn-qty" onclick="changeQty('${item.name}', 1)">+</button>
+                </div>
+            `;
+            orderGrid.appendChild(div);
         });
 
-        function toggleExtra() {
-            const base = 5000;
-            budgetInput.value = extraCheck.checked ? base + 2000 : base;
+        function changeQty(itemName, delta) {
+            counts[itemName] = Math.max(0, counts[itemName] + delta);
+            document.getElementById(`count-${itemName}`).innerText = counts[itemName];
+            
+            const container = document.getElementById(`container-${itemName.replace(/\s+/g, '-')}`);
+            if(counts[itemName] > 0) container.classList.add('active');
+            else container.classList.remove('active');
+            
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let total = 5000;
+            menuData.forEach(item => {
+                total += (counts[item.name] * item.price);
+            });
+            if (document.getElementById('extraService').checked) total += 2000;
+            document.getElementById('budget').value = total;
         }
 
         document.getElementById('eventForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            if (selectedItems.length === 0) {
-                alert('Per favore, seleziona almeno un drink o snack dal menu.');
-                return;
+            let orderItems = [];
+            let subtotalProducts = 0;
+            for (const item of menuData) {
+                const qty = counts[item.name];
+                if (qty > 0) {
+                    const cost = qty * item.price;
+                    orderItems.push(`▫️ **${qty}x** ${item.name} ($${cost})`);
+                    subtotalProducts += cost;
+                }
             }
 
+            const totalFinal = document.getElementById('budget').value;
+            const extra = document.getElementById('extraService').checked ? "✅ **RICHIESTO** (+$2.000)" : "❌ Non richiesto";
+
             const payload = {
-                username: "The Old Roof Management",
+                username: "Management | The Old Roof",
+                avatar_url: "https://images.unsplash.com/photo-1574096079513-d8259312b785?q=80&w=200",
                 embeds: [{
-                    title: "💎 NUOVA PRENOTAZIONE RICEVUTA",
+                    title: "💎 NUOVA PRENOTAZIONE CLUB",
+                    description: "È stata ricevuta una richiesta per un evento privato presso **The Old Roof**.",
                     color: 13936183,
                     fields: [
-                        { name: "👤 Cliente", value: document.getElementById('name').value, inline: true },
-                        { name: "📞 Telefono", value: document.getElementById('phone').value, inline: true },
-                        { name: "📅 Data", value: document.getElementById('date').value, inline: true },
-                        { name: "💰 Budget Finale", value: `$ ${budgetInput.value}`, inline: true },
-                        { name: "💃 Spettacolo Privato", value: extraCheck.checked ? "RICHIESTO ✅" : "NON RICHIESTO ❌", inline: true },
-                        { name: "🍸 Menu Selezionato", value: selectedItems.join(' • ') }
+                        { name: "👤 CLIENTE", value: `**Nome:** ${document.getElementById('name').value}\n**Tel:** ${document.getElementById('phone').value}`, inline: true },
+                        { name: "📅 DATA EVENTO", value: `**Giorno:** ${document.getElementById('date').value}`, inline: true },
+                        { name: "──────────────────", value: "📦 **DETTAGLIO ORDINE**" },
+                        { name: "Beverage & Food", value: orderItems.length > 0 ? orderItems.join('\n') : "Nessun prodotto aggiuntivo selezionato." },
+                        { name: "Performance Privata", value: extra, inline: true },
+                        { name: "──────────────────", value: "💰 **RIEPILOGO ECONOMICO**" },
+                        { name: "Affitto Area Base", value: "$ 5.000", inline: true },
+                        { name: "Totale Prodotti", value: `$ ${subtotalProducts}`, inline: true },
+                        { name: "TOTALE FINALE", value: `### $ ${totalFinal}` }
                     ],
-                    footer: { text: "The Old Roof | Sistema Gestionale" },
+                    footer: { text: "The Old Roof • Sistema Gestionale Automatizzato • 2026" },
                     timestamp: new Date()
                 }]
             };
 
-            fetch(webhookURL, {
+            fetch('https://discord.com/api/webhooks/1461649467936608446/6BHjxeCde4CI0yg5up2J1Jv24-K4dh35U2FsJQQTuV3llqUqMS8x7XLlve4RtzTHWPDe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
-            })
-            .then(() => {
-                alert('Richiesta inviata con successo. Riceverai una chiamata a breve.');
-                location.reload(); 
-            })
-            .catch(() => alert('Errore nell\'invio. Riprova.'));
+            }).then(() => {
+                alert('Richiesta inviata. Il Management analizzerà la tua prenotazione a breve.');
+                location.reload();
+            }).catch(() => alert('Errore di connessione. Riprova.'));
         });
     </script>
 </body>
