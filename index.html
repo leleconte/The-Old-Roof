@@ -46,7 +46,6 @@
             font-size: 2.5rem; color: var(--accent-color); margin-bottom: 40px;
         }
 
-        /* --- Listino Estetico --- */
         .menu-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px; margin-bottom: 80px;
@@ -69,7 +68,6 @@
 
         .menu-category li span { color: var(--accent-color); font-weight: 600; }
 
-        /* --- Booking Card --- */
         .booking-card {
             background: var(--card-bg); padding: clamp(20px, 5vw, 50px); border-radius: 20px; border: 1px solid #222;
         }
@@ -102,7 +100,6 @@
 
         .qty-val { font-weight: 700; color: white; min-width: 20px; text-align: center; font-size: 0.9rem; }
 
-        /* --- Luxury Checkbox --- */
         .performance-box {
             margin: 30px 0; padding: 25px; border-radius: 12px;
             background: linear-gradient(135deg, #111 0%, #0a0a0a 100%);
@@ -117,13 +114,14 @@
         .perf-text strong { display: block; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
         .perf-text small { color: #777; font-size: 0.75rem; }
 
-        /* --- Form --- */
         .form-group { margin-bottom: 25px; }
         label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--accent-color); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;}
         input { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid #333; color: white; border-radius: 8px; box-sizing: border-box; outline: none; transition: 0.3s; }
         input:focus { border-color: var(--accent-color); }
+        
+        .date-error { color: #ff4d4d; font-size: 0.75rem; margin-top: 10px; display: none; font-weight: 600; }
 
-        #budget { background: #000; border: 1px solid var(--accent-color); text-align: center; letter-spacing: 2px; }
+        #budget_display { background: #000; border: 1px solid var(--accent-color); text-align: center; letter-spacing: 2px; color: var(--accent-color); font-size: 2rem; font-weight: bold; height: 80px;}
 
         .btn-submit {
             background: var(--gold-gradient); color: black; padding: 22px; border: none;
@@ -131,7 +129,8 @@
             text-transform: uppercase; letter-spacing: 3px; transition: 0.4s; font-size: 0.9rem;
         }
 
-        .btn-submit:hover { filter: brightness(1.2); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        .btn-submit:hover { filter: brightness(1.2); transform: translateY(-3px); }
+        .btn-submit:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; }
 
         footer { text-align: center; padding: 60px; color: #444; font-size: 0.75rem; }
     </style>
@@ -191,9 +190,16 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Data dell'evento</label>
-                    <input type="date" id="date" required>
+                <div style="display: flex; gap: 15px;">
+                    <div class="form-group" style="flex: 2;">
+                        <label>Data dell'evento</label>
+                        <input type="date" id="date" required onchange="checkDateAvailability()">
+                        <div id="dateAlert" class="date-error">⚠️ Questa data è già stata riservata da un altro cliente.</div>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Ora di Inizio</label>
+                        <input type="time" id="time" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -214,11 +220,11 @@
 
                 <div class="form-group">
                     <label>Budget Totale Stimato</label>
-                    <input type="text" id="budget_display" value="$ 5.000" readonly style="color: var(--accent-color); font-size: 2rem; font-weight: bold; border-color: var(--accent-color); height: 80px;">
+                    <input type="text" id="budget_display" value="$ 5.000" readonly>
                     <input type="hidden" id="budget" value="5000">
                 </div>
 
-                <button type="submit" class="btn-submit">Invia Prenotazione Privata</button>
+                <button type="submit" id="submitBtn" class="btn-submit">Invia Prenotazione Privata</button>
             </form>
         </div>
     </section>
@@ -226,6 +232,9 @@
     <footer>THE OLD ROOF &copy; 2026 • DESIGN & EFFICIENZA</footer>
 
     <script>
+        // --- CONFIGURAZIONE DATE OCCUPATE ---
+        const occupiedDates = ["2026-01-20", "2026-01-25"]; // Esempio: date già prenotate
+
         const menuData = [
             { name: "Macbeth Whiskey Shot", price: 150 },
             { name: "Tequila Shot", price: 150 },
@@ -267,26 +276,36 @@
         function changeQty(itemName, delta) {
             counts[itemName] = Math.max(0, counts[itemName] + delta);
             document.getElementById(`cnt-${itemName}`).innerText = counts[itemName];
-            
             const container = document.getElementById(`item-${itemName.replace(/\s+/g, '-')}`);
-            if(counts[itemName] > 0) container.classList.add('active');
-            else container.classList.remove('active');
-            
+            container.classList.toggle('active', counts[itemName] > 0);
             updateTotal();
+        }
+
+        function checkDateAvailability() {
+            const dateVal = document.getElementById('date').value;
+            const isOccupied = occupiedDates.includes(dateVal);
+            const alertBox = document.getElementById('dateAlert');
+            const btn = document.getElementById('submitBtn');
+
+            if (isOccupied) {
+                alertBox.style.display = 'block';
+                btn.disabled = true;
+            } else {
+                alertBox.style.display = 'none';
+                btn.disabled = false;
+            }
         }
 
         function updateTotal() {
             let total = 5000;
             menuData.forEach(item => { total += (counts[item.name] * item.price); });
-            
-            const extraChecked = document.getElementById('extraService').checked;
-            if (extraChecked) {
+            const extra = document.getElementById('extraService').checked;
+            if (extra) {
                 total += 2000;
                 document.getElementById('perfBox').classList.add('checked');
             } else {
                 document.getElementById('perfBox').classList.remove('checked');
             }
-
             document.getElementById('budget').value = total;
             document.getElementById('budget_display').value = `$ ${total.toLocaleString()}`;
         }
@@ -299,26 +318,25 @@
             menuData.forEach(item => {
                 if (counts[item.name] > 0) {
                     const cost = counts[item.name] * item.price;
-                    orderItems.push(`🔹 **${counts[item.name]}x** ${item.name} ($ ${cost.toLocaleString()})`);
+                    orderItems.push(`╼ **${counts[item.name]}x** ${item.name} ($ ${cost.toLocaleString()})`);
                     subtotalItems += cost;
                 }
             });
 
             const payload = {
-                username: "System | The Old Roof",
-                avatar_url: "https://i.imgur.com/your-logo-here.png",
+                username: "THE OLD ROOF | Management",
                 embeds: [{
-                    title: "⚜️ NUOVA RICHIESTA EVENTO ESCLUSIVO",
-                    description: "Un nuovo cliente desidera prenotare un'esperienza privata presso il club.",
+                    title: "⚜️ NUOVA PRENOTAZIONE ESCLUSIVA",
+                    description: "───────────────\nUna nuova richiesta di affitto privato è stata ricevuta.\n───────────────",
                     color: 13936183,
                     fields: [
                         { name: "👤 CLIENTE", value: `**Nome:** ${document.getElementById('name').value}\n**Tel:** ${document.getElementById('phone').value}`, inline: true },
-                        { name: "📅 DATA PREVISTA", value: `**Giorno:** ${document.getElementById('date').value}`, inline: true },
-                        { name: "🍸 DETTAGLIO CONSUMAZIONI", value: orderItems.length > 0 ? orderItems.join('\n') : "_Nessun ordine aggiuntivo selezionato._" },
-                        { name: "🎭 PERFORMANCE", value: document.getElementById('extraService').checked ? "✨ **SÌ** (Area VIP)" : "❌ No", inline: true },
-                        { name: "💵 RIEPILOGO", value: `Affitto Base: **$ 5.000**\nConsumazioni: **$ ${subtotalItems.toLocaleString()}**\n\n**TOTALE FINALE: $ ${document.getElementById('budget').value.toLocaleString()}**` }
+                        { name: "🕒 TIMING", value: `**Giorno:** ${document.getElementById('date').value}\n**Orario:** ${document.getElementById('time').value}`, inline: true },
+                        { name: "📦 DETTAGLIO ORDINE", value: orderItems.length > 0 ? orderItems.join('\n') : "_Nessun drink/food extra selezionato._" },
+                        { name: "🎭 PERFORMANCE", value: document.getElementById('extraService').checked ? "✨ **SÌ** (Area VIP Attiva)" : "❌ Non richiesta", inline: true },
+                        { name: "💵 RIEPILOGO ECONOMICO", value: `### TOTALE: $ ${document.getElementById('budget').value.toLocaleString()}`, inline: false }
                     ],
-                    footer: { text: "The Old Roof • Amministrazione Automatica • 2026" },
+                    footer: { text: "The Old Roof • Amministrazione Centrale • 2026" },
                     timestamp: new Date()
                 }]
             };
@@ -328,7 +346,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             }).then(() => {
-                alert('Prenotazione inviata con successo. Verrai ricontattato a breve dal nostro staff.');
+                alert('Prenotazione inviata con successo. Verrai ricontattato a breve.');
                 location.reload();
             });
         });
