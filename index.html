@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Old Roof | Lounge & Exclusive Club</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -21,118 +21,116 @@
             color: var(--text-color);
             margin: 0;
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
         }
 
         header {
-            height: 60vh;
+            height: 50vh;
             background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1574096079513-d8259312b785?q=80&w=1500');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             border-bottom: 1px solid var(--accent-color);
+            padding: 0 20px;
         }
 
         h1 {
-            font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 5rem);
+            font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 5rem);
             margin: 0; background: var(--gold-gradient); -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; letter-spacing: 8px; text-transform: uppercase;
+            -webkit-text-fill-color: transparent; letter-spacing: 4px; text-transform: uppercase;
         }
 
-        .subtitle { font-size: 1rem; letter-spacing: 5px; text-transform: uppercase; margin-top: 15px; color: #888; }
+        .subtitle { font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-top: 15px; color: #888; }
 
-        section { padding: 60px 20px; max-width: 1100px; margin: 0 auto; }
+        section { padding: 40px 15px; max-width: 1100px; margin: 0 auto; }
 
         .section-title {
             text-align: center; font-family: 'Playfair Display', serif;
-            font-size: 2.5rem; color: var(--accent-color); margin-bottom: 40px;
+            font-size: 2rem; color: var(--accent-color); margin-bottom: 30px;
         }
 
         .menu-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px; margin-bottom: 80px;
+            gap: 20px; margin-bottom: 50px;
         }
 
         .menu-category {
-            background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid #222;
+            background: var(--card-bg); padding: 25px; border-radius: 12px; border: 1px solid #222;
         }
 
         .menu-category h3 {
             margin-top: 0; color: var(--accent-color); border-bottom: 1px solid #333;
-            padding-bottom: 10px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;
+            padding-bottom: 10px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;
         }
 
         .menu-category ul { list-style: none; padding: 0; }
         .menu-category li {
-            padding: 8px 0; border-bottom: 1px solid #1a1a1a; font-size: 0.85rem;
+            padding: 10px 0; border-bottom: 1px solid #1a1a1a; font-size: 0.85rem;
             display: flex; justify-content: space-between; color: #bbb;
         }
 
-        .menu-category li span { color: var(--accent-color); font-weight: 600; }
-
         .booking-card {
-            background: var(--card-bg); padding: clamp(20px, 5vw, 50px); border-radius: 20px; border: 1px solid #222;
+            background: var(--card-bg); padding: clamp(15px, 4vw, 40px); border-radius: 15px; border: 1px solid #222;
         }
 
+        /* Responsive Order Grid */
         .order-system {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 12px; background: #080808; padding: 20px; border-radius: 12px; border: 1px solid #222;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+            gap: 10px; background: #080808; padding: 15px; border-radius: 12px; border: 1px solid #222;
+        }
+
+        @media (min-width: 768px) {
+            .order-system { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
         }
 
         .qty-item {
             display: flex; align-items: center; justify-content: space-between;
             background: #151515; padding: 12px 15px; border-radius: 8px; border: 1px solid #222;
-            transition: all 0.3s ease;
         }
 
-        .qty-item.active { border-color: var(--accent-color); background: #1a1810; box-shadow: 0 0 15px rgba(212, 175, 55, 0.05); }
+        .qty-item.active { border-color: var(--accent-color); background: #1a1810; }
 
-        .qty-label { font-size: 0.8rem; color: #eee; font-weight: 500; }
-        .qty-price-hint { font-size: 0.7rem; color: var(--accent-color); display: block; opacity: 0.6; margin-top: 2px; }
-
-        .qty-controls { display: flex; align-items: center; gap: 12px; }
+        .qty-controls { display: flex; align-items: center; gap: 15px; }
 
         .btn-qty {
             background: #222; border: 1px solid #444; color: #fff;
-            width: 28px; height: 28px; border-radius: 6px; cursor: pointer; font-size: 1rem;
-            display: flex; align-items: center; justify-content: center; transition: 0.2s;
+            width: 35px; height: 35px; border-radius: 8px; cursor: pointer; font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .btn-qty:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        /* Form Layout */
+        .input-row { display: flex; flex-direction: column; gap: 15px; }
+        @media (min-width: 600px) { .input-row { flex-direction: row; } }
 
-        .qty-val { font-weight: 700; color: white; min-width: 20px; text-align: center; font-size: 0.9rem; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--accent-color); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;}
+        
+        input { 
+            width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid #333; 
+            color: white; border-radius: 8px; box-sizing: border-box; outline: none; 
+            font-size: 16px; /* Evita zoom su mobile */
+        }
 
         .performance-box {
-            margin: 30px 0; padding: 25px; border-radius: 12px;
-            background: linear-gradient(135deg, #111 0%, #0a0a0a 100%);
-            border: 1px solid #333; display: flex; align-items: center; justify-content: space-between;
-            transition: 0.4s;
+            margin: 25px 0; padding: 20px; border-radius: 12px;
+            background: #0a0a0a; border: 1px solid #333; 
+            display: flex; align-items: center; justify-content: space-between;
         }
 
-        .performance-box.checked { border-color: var(--accent-color); box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
+        .perf-text strong { display: block; color: var(--accent-color); font-size: 0.85rem; }
+        .perf-text small { color: #777; font-size: 0.7rem; display: block; margin-top: 2px; }
 
-        .perf-info { display: flex; align-items: center; gap: 15px; }
-        .perf-icon { font-size: 1.5rem; color: var(--accent-color); }
-        .perf-text strong { display: block; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
-        .perf-text small { color: #777; font-size: 0.75rem; }
-
-        .form-group { margin-bottom: 25px; }
-        label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--accent-color); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;}
-        input { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid #333; color: white; border-radius: 8px; box-sizing: border-box; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--accent-color); }
-        
-        .date-error { color: #ff4d4d; font-size: 0.75rem; margin-top: 10px; display: none; font-weight: 600; }
-
-        #budget_display { background: #000; border: 1px solid var(--accent-color); text-align: center; letter-spacing: 2px; color: var(--accent-color); font-size: 2rem; font-weight: bold; height: 80px;}
+        #budget_display { 
+            background: #000; border: 2px solid var(--accent-color); text-align: center; 
+            color: var(--accent-color); font-size: 1.8rem; height: 70px;
+        }
 
         .btn-submit {
-            background: var(--gold-gradient); color: black; padding: 22px; border: none;
+            background: var(--gold-gradient); color: black; padding: 20px; border: none;
             border-radius: 10px; font-weight: 800; cursor: pointer; width: 100%;
-            text-transform: uppercase; letter-spacing: 3px; transition: 0.4s; font-size: 0.9rem;
+            text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-top: 10px;
         }
 
-        .btn-submit:hover { filter: brightness(1.2); transform: translateY(-3px); }
-        .btn-submit:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; }
-
-        footer { text-align: center; padding: 60px; color: #444; font-size: 0.75rem; }
+        footer { text-align: center; padding: 40px 20px; color: #444; font-size: 0.7rem; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -178,44 +176,41 @@
 
     <section id="booking">
         <div class="booking-card">
-            <h2 style="text-align: center; color: var(--accent-color); font-family: 'Playfair Display'; margin: 0 0 10px 0;">Prenotazione Evento</h2>
-            <p style="text-align: center; font-size: 0.8rem; color: #666; margin-bottom: 40px;">Esclusività garantita. Base minima di prenotazione: $ 5.000</p>
+            <h2 style="text-align: center; color: var(--accent-color); font-family: 'Playfair Display'; margin-bottom: 5px;">Prenotazione</h2>
+            <p style="text-align: center; font-size: 0.75rem; color: #666; margin-bottom: 30px;">Base minima: $ 5.000</p>
             
             <form id="eventForm">
                 <div class="form-group">
                     <label>Responsabile & Recapito</label>
-                    <div style="display: flex; gap: 15px;">
+                    <div class="input-row">
                         <input type="text" id="name" placeholder="Nome IC" required>
-                        <input type="tel" id="phone" placeholder="Numero di Telefono" required>
-                    </div>
-                </div>
-
-                <div style="display: flex; gap: 15px;">
-                    <div class="form-group" style="flex: 2;">
-                        <label>Data dell'evento</label>
-                        <input type="date" id="date" required onchange="checkDateAvailability()">
-                        <div id="dateAlert" class="date-error">⚠️ Questa data è già stata riservata da un altro cliente.</div>
-                    </div>
-                    <div class="form-group" style="flex: 1;">
-                        <label>Ora di Inizio</label>
-                        <input type="time" id="time" required>
+                        <input type="tel" id="phone" placeholder="Telefono" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Selezione Beverage & Food (Quantità)</label>
+                    <label>Data e Ora Inizio</label>
+                    <div class="input-row">
+                        <input type="date" id="date" style="flex: 2;" required onchange="checkDateAvailability()">
+                        <input type="time" id="time" style="flex: 1;" required>
+                    </div>
+                    <div id="dateAlert" style="color: #ff4d4d; font-size: 0.7rem; margin-top: 8px; display: none;">⚠️ Data già occupata.</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Bevande & Food (Quantità)</label>
                     <div class="order-system" id="orderGrid"></div>
                 </div>
 
                 <div class="performance-box" id="perfBox">
-                    <div class="perf-info">
-                        <span class="perf-icon">✨</span>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 1.2rem;">✨</span>
                         <div class="perf-text">
                             <strong>Private Performance</strong>
-                            <small>Accesso Area Gold con intrattenimento (+ $ 2.000)</small>
+                            <small>Area Gold + Intrattenimento (+ $ 2.000)</small>
                         </div>
                     </div>
-                    <input type="checkbox" id="extraService" style="width: 25px; height: 25px; cursor: pointer; accent-color: var(--accent-color);" onchange="updateTotal()">
+                    <input type="checkbox" id="extraService" style="width: 25px; height: 25px; accent-color: var(--accent-color);" onchange="updateTotal()">
                 </div>
 
                 <div class="form-group">
@@ -224,16 +219,15 @@
                     <input type="hidden" id="budget" value="5000">
                 </div>
 
-                <button type="submit" id="submitBtn" class="btn-submit">Invia Prenotazione Privata</button>
+                <button type="submit" id="submitBtn" class="btn-submit">Invia Prenotazione</button>
             </form>
         </div>
     </section>
 
-    <footer>THE OLD ROOF &copy; 2026 • DESIGN & EFFICIENZA</footer>
+    <footer>THE OLD ROOF &copy; 2026<br>DESIGN & EFFICIENZA</footer>
 
     <script>
-        // --- CONFIGURAZIONE DATE OCCUPATE ---
-        const occupiedDates = ["2026-01-20", "2026-01-25"]; // Esempio: date già prenotate
+        const occupiedDates = ["2026-01-20"]; 
 
         const menuData = [
             { name: "Macbeth Whiskey Shot", price: 150 },
@@ -258,15 +252,14 @@
             counts[item.name] = 0;
             const div = document.createElement('div');
             div.className = 'qty-item';
-            div.id = `item-${item.name.replace(/\s+/g, '-')}`;
             div.innerHTML = `
-                <div>
-                    <span class="qty-label">${item.name}</span>
-                    <span class="qty-price-hint">$ ${item.price} cad.</span>
+                <div style="max-width: 60%;">
+                    <div class="qty-label" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name}</div>
+                    <span class="qty-price-hint">$ ${item.price}</span>
                 </div>
                 <div class="qty-controls">
                     <button type="button" class="btn-qty" onclick="changeQty('${item.name}', -1)">−</button>
-                    <span class="qty-val" id="cnt-${item.name}">0</span>
+                    <span id="cnt-${item.name}" style="font-weight: bold; min-width: 20px; text-align: center;">0</span>
                     <button type="button" class="btn-qty" onclick="changeQty('${item.name}', 1)">+</button>
                 </div>
             `;
@@ -276,67 +269,41 @@
         function changeQty(itemName, delta) {
             counts[itemName] = Math.max(0, counts[itemName] + delta);
             document.getElementById(`cnt-${itemName}`).innerText = counts[itemName];
-            const container = document.getElementById(`item-${itemName.replace(/\s+/g, '-')}`);
-            container.classList.toggle('active', counts[itemName] > 0);
             updateTotal();
         }
 
         function checkDateAvailability() {
-            const dateVal = document.getElementById('date').value;
-            const isOccupied = occupiedDates.includes(dateVal);
-            const alertBox = document.getElementById('dateAlert');
-            const btn = document.getElementById('submitBtn');
-
-            if (isOccupied) {
-                alertBox.style.display = 'block';
-                btn.disabled = true;
-            } else {
-                alertBox.style.display = 'none';
-                btn.disabled = false;
-            }
+            const isOccupied = occupiedDates.includes(document.getElementById('date').value);
+            document.getElementById('dateAlert').style.display = isOccupied ? 'block' : 'none';
+            document.getElementById('submitBtn').disabled = isOccupied;
         }
 
         function updateTotal() {
             let total = 5000;
             menuData.forEach(item => { total += (counts[item.name] * item.price); });
-            const extra = document.getElementById('extraService').checked;
-            if (extra) {
-                total += 2000;
-                document.getElementById('perfBox').classList.add('checked');
-            } else {
-                document.getElementById('perfBox').classList.remove('checked');
-            }
+            if (document.getElementById('extraService').checked) total += 2000;
             document.getElementById('budget').value = total;
             document.getElementById('budget_display').value = `$ ${total.toLocaleString()}`;
         }
 
         document.getElementById('eventForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
             let orderItems = [];
-            let subtotalItems = 0;
             menuData.forEach(item => {
-                if (counts[item.name] > 0) {
-                    const cost = counts[item.name] * item.price;
-                    orderItems.push(`╼ **${counts[item.name]}x** ${item.name} ($ ${cost.toLocaleString()})`);
-                    subtotalItems += cost;
-                }
+                if (counts[item.name] > 0) orderItems.push(`╼ **${counts[item.name]}x** ${item.name}`);
             });
 
             const payload = {
-                username: "THE OLD ROOF | Management",
+                username: "THE OLD ROOF | Bot",
                 embeds: [{
-                    title: "⚜️ NUOVA PRENOTAZIONE ESCLUSIVA",
-                    description: "───────────────\nUna nuova richiesta di affitto privato è stata ricevuta.\n───────────────",
+                    title: "⚜️ NUOVA RICHIESTA EVENTO",
                     color: 13936183,
                     fields: [
-                        { name: "👤 CLIENTE", value: `**Nome:** ${document.getElementById('name').value}\n**Tel:** ${document.getElementById('phone').value}`, inline: true },
-                        { name: "🕒 TIMING", value: `**Giorno:** ${document.getElementById('date').value}\n**Orario:** ${document.getElementById('time').value}`, inline: true },
-                        { name: "📦 DETTAGLIO ORDINE", value: orderItems.length > 0 ? orderItems.join('\n') : "_Nessun drink/food extra selezionato._" },
-                        { name: "🎭 PERFORMANCE", value: document.getElementById('extraService').checked ? "✨ **SÌ** (Area VIP Attiva)" : "❌ Non richiesta", inline: true },
-                        { name: "💵 RIEPILOGO ECONOMICO", value: `### TOTALE: $ ${document.getElementById('budget').value.toLocaleString()}`, inline: false }
+                        { name: "👤 CLIENTE", value: `${document.getElementById('name').value}\nTel: ${document.getElementById('phone').value}`, inline: true },
+                        { name: "📅 DATA/ORA", value: `${document.getElementById('date').value} ore ${document.getElementById('time').value}`, inline: true },
+                        { name: "📦 ORDINE", value: orderItems.length > 0 ? orderItems.join('\n') : "Solo affitto base" },
+                        { name: "💵 TOTALE", value: `**$ ${document.getElementById('budget').value.toLocaleString()}**` }
                     ],
-                    footer: { text: "The Old Roof • Amministrazione Centrale • 2026" },
                     timestamp: new Date()
                 }]
             };
@@ -346,7 +313,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             }).then(() => {
-                alert('Prenotazione inviata con successo. Verrai ricontattato a breve.');
+                alert('Inviato con successo!');
                 location.reload();
             });
         });
