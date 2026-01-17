@@ -67,12 +67,13 @@
             padding: 10px 0; border-bottom: 1px solid #1a1a1a; font-size: 0.85rem;
             display: flex; justify-content: space-between; color: #bbb;
         }
+        
+        .menu-category li span { color: var(--accent-color); font-weight: 600; }
 
         .booking-card {
             background: var(--card-bg); padding: clamp(15px, 4vw, 40px); border-radius: 15px; border: 1px solid #222;
         }
 
-        /* Responsive Order Grid */
         .order-system {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
             gap: 10px; background: #080808; padding: 15px; border-radius: 12px; border: 1px solid #222;
@@ -85,6 +86,7 @@
         .qty-item {
             display: flex; align-items: center; justify-content: space-between;
             background: #151515; padding: 12px 15px; border-radius: 8px; border: 1px solid #222;
+            transition: 0.3s;
         }
 
         .qty-item.active { border-color: var(--accent-color); background: #1a1810; }
@@ -97,7 +99,6 @@
             display: flex; align-items: center; justify-content: center;
         }
 
-        /* Form Layout */
         .input-row { display: flex; flex-direction: column; gap: 15px; }
         @media (min-width: 600px) { .input-row { flex-direction: row; } }
 
@@ -107,7 +108,7 @@
         input { 
             width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid #333; 
             color: white; border-radius: 8px; box-sizing: border-box; outline: none; 
-            font-size: 16px; /* Evita zoom su mobile */
+            font-size: 16px; 
         }
 
         .performance-box {
@@ -146,29 +147,30 @@
             <div class="menu-category">
                 <h3>Spirits & Shots</h3>
                 <ul>
-                    <li>Macbeth Whiskey Shot <span>$ 150</span></li>
-                    <li>Tequila Shot <span>$ 150</span></li>
-                    <li>Vodka Shot <span>$ 150</span></li>
-                    <li>Richards Whiskey <span>$ 800</span></li>
-                    <li>Cherenkov Vodka <span>$ 750</span></li>
+                    <li>Whiskey <span>$ 100</span></li>
+                    <li>Tequila <span>$ 150</span></li>
+                    <li>Rum <span>$ 250</span></li>
+                    <li>Vodka <span>$ 50</span></li>
+                    <li>Richard's Whiskey <span>$ 300</span></li>
+                    <li>Whiskey Macbeth <span>$ 500</span></li>
                 </ul>
             </div>
             <div class="menu-category">
                 <h3>Champagne & Beer</h3>
                 <ul>
-                    <li>Blêuter'd Diamond <span>$ 2.500</span></li>
-                    <li>Blêuter'd Gold <span>$ 1.800</span></li>
-                    <li>Pißwasser <span>$ 100</span></li>
-                    <li>Logger Beer <span>$ 100</span></li>
+                    <li>Blêuter'd Diamond <span>$ 15.000</span></li>
+                    <li>Blêuter'd Gold <span>$ 5.000</span></li>
+                    <li>Pißwasser Beer <span>$ 120</span></li>
+                    <li>Logger Beer <span>$ 120</span></li>
                 </ul>
             </div>
             <div class="menu-category">
                 <h3>Snacks & Soft</h3>
                 <ul>
-                    <li>Meteorite Bar <span>$ 50</span></li>
-                    <li>Phat Chips <span>$ 50</span></li>
-                    <li>eCola <span>$ 40</span></li>
-                    <li>Junk Energy <span>$ 60</span></li>
+                    <li>Meteorite <span>$ 5</span></li>
+                    <li>eCola <span>$ 2</span></li>
+                    <li>Junk Energy <span>$ 1</span></li>
+                    <li>Sprunk <span>$ 2</span></li>
                 </ul>
             </div>
         </div>
@@ -230,19 +232,20 @@
         const occupiedDates = ["2026-01-20"]; 
 
         const menuData = [
-            { name: "Macbeth Whiskey Shot", price: 150 },
-            { name: "Tequila Shot", price: 150 },
-            { name: "Vodka Shot", price: 150 },
-            { name: "Richards Whiskey", price: 800 },
-            { name: "Cherenkov Vodka", price: 750 },
-            { name: "Blêuter'd Diamond", price: 2500 },
-            { name: "Blêuter'd Gold", price: 1800 },
-            { name: "Pißwasser", price: 100 },
-            { name: "Logger Beer", price: 100 },
-            { name: "Meteorite Bar", price: 50 },
-            { name: "Phat Chips", price: 50 },
-            { name: "eCola", price: 40 },
-            { name: "Junk Energy", price: 60 }
+            { name: "Whiskey", price: 100 },
+            { name: "Tequila", price: 150 },
+            { name: "Rum", price: 250 },
+            { name: "Vodka", price: 50 },
+            { name: "Richard's Whiskey", price: 300 },
+            { name: "Whiskey Macbeth", price: 500 },
+            { name: "Blêuter'd Diamond", price: 15000 },
+            { name: "Blêuter'd Gold", price: 5000 },
+            { name: "Pißwasser Beer", price: 120 },
+            { name: "Logger Beer", price: 120 },
+            { name: "Meteorite", price: 5 },
+            { name: "eCola", price: 2 },
+            { name: "Junk Energy", price: 1 },
+            { name: "Sprunk", price: 2 }
         ];
 
         const orderGrid = document.getElementById('orderGrid');
@@ -252,6 +255,7 @@
             counts[item.name] = 0;
             const div = document.createElement('div');
             div.className = 'qty-item';
+            div.id = `item-${item.name.replace(/\s+/g, '-').replace(/'/g, '')}`;
             div.innerHTML = `
                 <div style="max-width: 60%;">
                     <div class="qty-label" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name}</div>
@@ -269,6 +273,10 @@
         function changeQty(itemName, delta) {
             counts[itemName] = Math.max(0, counts[itemName] + delta);
             document.getElementById(`cnt-${itemName}`).innerText = counts[itemName];
+            
+            const divId = `item-${itemName.replace(/\s+/g, '-').replace(/'/g, '')}`;
+            document.getElementById(divId).classList.toggle('active', counts[itemName] > 0);
+            
             updateTotal();
         }
 
@@ -290,20 +298,22 @@
             e.preventDefault();
             let orderItems = [];
             menuData.forEach(item => {
-                if (counts[item.name] > 0) orderItems.push(`╼ **${counts[item.name]}x** ${item.name}`);
+                if (counts[item.name] > 0) orderItems.push(`╼ **${counts[item.name]}x** ${item.name} ($${(counts[item.name] * item.price).toLocaleString()})`);
             });
 
             const payload = {
-                username: "THE OLD ROOF | Bot",
+                username: "THE OLD ROOF | Management",
                 embeds: [{
-                    title: "⚜️ NUOVA RICHIESTA EVENTO",
+                    title: "⚜️ NUOVA PRENOTAZIONE ESCLUSIVA",
                     color: 13936183,
                     fields: [
-                        { name: "👤 CLIENTE", value: `${document.getElementById('name').value}\nTel: ${document.getElementById('phone').value}`, inline: true },
-                        { name: "📅 DATA/ORA", value: `${document.getElementById('date').value} ore ${document.getElementById('time').value}`, inline: true },
-                        { name: "📦 ORDINE", value: orderItems.length > 0 ? orderItems.join('\n') : "Solo affitto base" },
-                        { name: "💵 TOTALE", value: `**$ ${document.getElementById('budget').value.toLocaleString()}**` }
+                        { name: "👤 CLIENTE", value: `**Nome:** ${document.getElementById('name').value}\n**Tel:** ${document.getElementById('phone').value}`, inline: true },
+                        { name: "📅 DATA/ORA", value: `**Giorno:** ${document.getElementById('date').value}\n**Orario:** ${document.getElementById('time').value}`, inline: true },
+                        { name: "📦 DETTAGLIO ORDINE", value: orderItems.length > 0 ? orderItems.join('\n') : "_Nessun extra selezionato._" },
+                        { name: "🎭 PERFORMANCE", value: document.getElementById('extraService').checked ? "✨ **SÌ**" : "❌ No", inline: true },
+                        { name: "💵 TOTALE", value: `### $ ${document.getElementById('budget').value.toLocaleString()}`, inline: false }
                     ],
+                    footer: { text: "The Old Roof • Amministrazione • 2026" },
                     timestamp: new Date()
                 }]
             };
@@ -313,7 +323,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             }).then(() => {
-                alert('Inviato con successo!');
+                alert('Prenotazione inviata con successo!');
                 location.reload();
             });
         });
